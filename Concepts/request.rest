@@ -5,6 +5,7 @@ GET http://localhost:3000/users
 ### Create user
 POST http://localhost:3000/users
 Content-Type: application/json
+
 {
     "username": "Bob",
     "password": "Welcome123"
@@ -14,6 +15,7 @@ Content-Type: application/json
 ### Login
 POST http://localhost:3000/users/login
 Content-Type: application/json
+
 {
     "username": "Bob",
     "password": "Welcome123"
