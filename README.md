@@ -4,7 +4,7 @@ to run:
 3. npm start
 4. open browser and go to "localhost:3000"
 
-add '/login' to url to go to login page
+add '/login' to url to go to login page - this is now implemented by clicking the person icon on the top left of the nav bar
 
 Current features:
 - Create user account
