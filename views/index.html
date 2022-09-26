@@ -4,10 +4,54 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <title>Document</title>
     <script src="/js/server.js"></script>
   </head>
   <body>
-    <h1 id='head'>Home Page</h1>
+    <header>
+      <div class="topnav">
+        <div class="brand">
+          <a href="/">BRAND</a>
+        </div>
+        <input class="searchbar" type="text" placeholder="Search..">
+        <div class="signin">
+          <a href="/login" class="fas fa-user"></a>
+          <!-- TODO this will link to the shopping cart area when created  -->
+          <a href="" class="fas fa-shopping-cart"></a>
+        </div>
+      </div>
+      <div class="secondnav">
+        <!--  Link to the different  pages    -->
+        <a href="">PRODUCTS</a>
+        <a href="">ABOUT US</a>
+        <a  href=""> OUTLET</a>
+      </div>
+    </header>
+
+    <div class="product-image">
+      <img height="500px" width="100%" src="/images/productimg1.png" alt="Product Image" />
+    </div>
+
+    <div class="product-info">
+      <h1>THIS AREA WILL HAVE OUR PRODUCTS THAT WE WANT TO ADVERTISE</h1>
+    </div>
+    <footer>
+      <div class="footer">
+        <div class=" contact-info flex-col">
+          <h2>Contact Us </h2>
+          <h3 class="flex-row">Phone: &nbsp<p> 021 234 5678</p></h3>
+        </div>
+
+        <div class="social-icons">
+          Get social with us
+          <img height="30px" src="/images/google.png" alt="Google button" />
+          <img height="30px" src="/images/twitter.png" alt="Twitter button" />
+          <img height="30px" src="/images/facebook.png" alt="Facebook button" />
+        </div>
+
+      </div>
+    </footer>
   </body>
 </html>
