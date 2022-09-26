@@ -47,9 +47,11 @@ app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "views/login.html"));
 });
 
-app.post("/login", passport.authenticate("local", {
+app.post(
+  "/login",
+  passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/login"
+    failureRedirect: "/login",
   })
 );
 
@@ -69,13 +71,22 @@ app.post("/signup", async (req, res) => {
   console.log(users);
 });
 
+app.post("/logout", (req, res, next) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
+
 /* Add to above methods to check if user is logged in */
 
 function checkNotAuth(req, res, next) {
-    if (req.isAuthenticated()) {
-      res.sendFile(path.join(__dirname, "..", "views/index.html"));
-    }
-    next()
+  if (req.isAuthenticated()) {
+    res.sendFile(path.join(__dirname, "..", "views/index.html"));
   }
+  next();
+}
 
 app.listen(process.env.PORT || PORT, console.log(`Listening on port ${PORT}`));
