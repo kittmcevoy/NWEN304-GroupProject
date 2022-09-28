@@ -6,6 +6,7 @@ const path = require("path");
 const app = express();
 const PORT = 3000;
 const users = [];
+const products = [];
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "public")));
@@ -78,6 +79,29 @@ app.post("/logout", (req, res, next) => {
     }
     res.redirect("/");
   });
+});
+
+
+/* admin/add-product GET method */ 
+app.get('/admin/add-product', (req, res, next) => {
+  res.sendFile(path.join(__dirname, '..', 'views', 'add-product.html'));
+  });
+
+/* admin/add-product POST method */ 
+app.post('/admin/add-product', (req, res, next) => {
+  products.push({ title: req.body.title, 
+                  description: req.body.description});
+    res.redirect('/');
+});
+
+/* /products store added products */ 
+app.get("/products", (req, res) => {
+  res.json(products);
+});
+
+/*  404 page if a user typed the wrong URL   */
+app.use((req, res, next) => {
+  res.status(404).sendFile(path.join(__dirname, '..' ,'views', '404.html'));
 });
 
 /* Add to above methods to check if user is logged in */

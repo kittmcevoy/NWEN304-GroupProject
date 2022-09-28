@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Product</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list">
+                <li class="main-header__item"><a href="/">Shop</a></li>
+                <li class="main-header__item"><a class="active" href="/admin/add-product">Add Product</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <form class="product-form" action="/admin/add-product" method="POST">
+            <div class="form-control">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title">
+            </div>
+            <div class="form-control">
+                <label for="description">Product Description</label>
+                <input type="text" name="description" id="description">
+            </div>
+            <div class="form-control">
+                <label for="Size">Size</label>
+                <input type="text" name="Size" id="Size">
+            </div>
+            <div class="form-control">
+                <label for="Color">Color</label>
+                <input type="text" name="Color" id="Color">
+            </div>
+            <div class="form-control">
+                <label for="Color">Price</label>
+                <input type="number" name="Price" id="Price">
+            </div>
+            <div class="form-control">
+                <label for="Color">Image</label>
+                <input type="image" name="Image" id="Image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxm7PdXxZp2psxs3AbSNX-H0L7W5HEVE_mSQ&usqp=CAU", alt="T-shirt">
+            </div>
+            <button type="submit">Add Product</button>
+        </form>
+    </main>
+</body>
+
+</html>
