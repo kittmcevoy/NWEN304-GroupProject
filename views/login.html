@@ -6,29 +6,29 @@
   </head>
   <body>
     <div class="hero">
-      <a href = "/">Back</a>
+      <a class="back-btn" href = "/">Back</a>
       <div class="form-box">
         <div class="button-box">
           <div id="btn"></div>
           <button type="button" class="toggle-btn" onclick="login()">Login</button>
           <button type="button" class="toggle-btn" onclick="signup()">Sign up</button>
         </div>
-        <form id="login" class="input-group" action="/login" method="POST">
+        <form id="login" class="input-group" action="/local-login" method="POST">
           <input id="username" name="username" type="text" class="input-field" placeholder="Username" required>
           <input id="password" name="password" type="text" class="input-field" placeholder="Password" required>
           <input type="checkbox" class="check-box"><span>Remember Password</span>
           <button type="submit" class="submit-btn">Login</button>
         </form>
-        <form id="signup" class="input-group" action="/signup" method="POST">
+        <form id="signup" class="input-group" action="/local-signup" method="POST">
           <input id="email" name="email" type="email" class="input-field" placeholder="example@domain.com" required>
           <input id="username" name="username" type="text" class="input-field" placeholder="Username" required>
-          <input id="password" name="password" type="text" class="input-field" placeholder="Password" required>
+          <input id="password" name="password" type="text" class="input-field" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Minimum 8 characters, at least 1 letter, 1 number and 1 special character" required>
           <input type="checkbox" class="check-box" required><span>I agree to the terms & conditions</span>
           <button type="submit" class="submit-btn">Sign up</button>
         </form>
         <span class="form-box-span">Login using</span>
         <div class="social-icons">
-          <img src="/images/google.png" alt="Google login" />
+          <a href="/auth/google"><img src="/images/google.png" alt="Google login" /></a>
           <img src="/images/twitter.png" alt="Twitter login" />
           <img src="/images/facebook.png" alt="Facebook login" />
         </div>
