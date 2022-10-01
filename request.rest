@@ -1,23 +1,25 @@
 ### Get all users
 GET http://localhost:3000/users
 
+### Get all products
+GET http://localhost:3000/products
 
 ### Create user
-POST http://localhost:3000/signup
+POST http://localhost:3000/local-signup
 Content-Type: application/json
 
 {
     "email": "bob@bobsmail.com",
     "username": "Bob",
-    "password": "Welcome123"
+    "password": "Welcome123!"
 }
 
 
 ### Login
-POST http://localhost:3000/login
+POST http://localhost:3000/local-login
 Content-Type: application/json
 
 {
     "username": "Bob",
-    "password": "Welcome123"
+    "password": "Welcome123!"
 }
