@@ -1,4 +1,6 @@
 const { db } = require("./User.js");
+const Item = require('./Item');
+const Order = require('./Order');
 const products = [];
 
 module.exports = function (app, path, passport) {
@@ -61,20 +63,34 @@ module.exports = function (app, path, passport) {
     res.sendFile(path.join(__dirname, "..", "views", "add-product.html"));
   });
 
-  /* admin/add-product POST method */
-  app.post("/admin/add-product", (req, res, next) => {
-    products.push({
-      title: req.body.title,
-      description: req.body.description,
-      price: req.body.Price,
-    });
-    res.redirect("/");
-  });
+  // /* admin/add-product POST method */
+  // app.post("/admin/add-product", (req, res, next) => {
+  //   products.push({
+  //     title: req.body.title,
+  //     description: req.body.description,
+  //     price: req.body.Price,
+  //   });
+  //   res.redirect("/");
+  // });
 
   /* /products store added products */
   app.get("/products", (req, res) => {
     res.json(products);
   });
+
+  /* CREATE => items stored in db cluster */  
+  app.post("/admin/add-product", async (req, res) =>{
+    let body = req.body;
+    const newItem = new Item(body)
+
+    try{
+        const savedItem = await newItem.save();
+        res.status(200).json(savedItem);
+
+    }catch(err){
+        res.status(500).json(err)
+    }
+})
 
   /*  404 page if a user typed the wrong URL   */
   app.use((req, res, next) => {
