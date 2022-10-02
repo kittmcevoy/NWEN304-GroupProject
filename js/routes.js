@@ -1,4 +1,4 @@
-const users = [];
+const { db } = require("./User.js");
 const products = [];
 
 module.exports = function (app, path, passport) {
@@ -8,7 +8,9 @@ module.exports = function (app, path, passport) {
   });
 
   app.get("/users", (req, res) => {
-    res.json(users);
+    db.collection('users').find().toArray(function(err, docs) {
+      res.json(docs);
+    })
   });
 
   app.get("/login", (req, res) => {
