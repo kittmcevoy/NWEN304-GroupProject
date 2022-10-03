@@ -2,7 +2,7 @@
 GET http://localhost:3000/users
 
 ### Get all products
-GET http://localhost:3000/products
+GET http://localhost:3000/items
 
 ### Create user
 POST http://localhost:3000/local-signup
