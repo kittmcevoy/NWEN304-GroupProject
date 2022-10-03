@@ -1,3 +1,5 @@
+Site is hosted on heroku: https://nwen304-group-host.herokuapp.com/
+
 to run:
 1. Navigate to root directory (where README is located)
 2. npm install
