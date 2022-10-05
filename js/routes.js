@@ -1,6 +1,7 @@
 const { db } = require('./User.js');
 const Item = require('./Item');
 const Order = require('./Order');
+const Cart = require('./Cart')
 const products = [];
 
 module.exports = function (app, path, passport) {
@@ -62,7 +63,7 @@ module.exports = function (app, path, passport) {
     });
 
     /* CREATE => items stored in db cluster */
-    app.post('/add-product', isLoggedIn, async (req, res) => {
+    app.post('/add-item', isLoggedIn, async (req, res) => {
         let body = req.body;
         const newItem = new Item(body);
 
@@ -74,7 +75,7 @@ module.exports = function (app, path, passport) {
         }
     });
 
-    /* /products store added products */
+    /* /items store added products */
     app.get('/items', (req, res) => {
         res.json(products);
     });
@@ -85,6 +86,11 @@ module.exports = function (app, path, passport) {
 
     app.get('/403', (req, res) => {
         res.render('403.ejs');
+    });
+
+    // Cart 
+       app.get('/cart', isLoggedIn, (req, res, next) => {
+        res.render('cart.ejs');
     });
 
     /*  404 page if a user typed the wrong URL   */
