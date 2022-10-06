@@ -7,7 +7,7 @@ const products = [];
 module.exports = function (app, path, passport) {
     /* Home page routes */
     app.get('/', (req, res) => {
-        res.render('index.ejs');
+        res.render('index.ejs', { user: req.user });
     });
 
     app.get('/users', (req, res) => {
