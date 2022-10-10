@@ -1,7 +1,7 @@
 const { db } = require('./User.js');
 const Item = require('./Item');
 const Order = require('./Order');
-const Cart = require('./Cart')
+const Cart = require('./Cart');
 const products = [];
 
 module.exports = function (app, path, passport) {
@@ -38,9 +38,13 @@ module.exports = function (app, path, passport) {
         })
     );
 
-    app.post('/logout', (req, res, next) => {
-        req.logout();
-        req.redirect('/');
+    app.get('/logout', function (req, res, next) {
+        req.logout(function (err) {
+            if (err) {
+                return next(err);
+            }
+            res.redirect('/');
+        });
     });
 
     // Login with google
@@ -88,8 +92,8 @@ module.exports = function (app, path, passport) {
         res.render('403.ejs');
     });
 
-    // Cart 
-       app.get('/cart', isLoggedIn, (req, res, next) => {
+    // Cart
+    app.get('/cart', isLoggedIn, (req, res, next) => {
         res.render('cart.ejs');
     });
 

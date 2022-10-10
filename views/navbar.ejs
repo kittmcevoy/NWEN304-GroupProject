@@ -1,0 +1,33 @@
+<nav class="navbar">
+    <!-- LOGO -->
+    <div class="logo"><a href="/" style="color: white">Clothes.</a></div>
+    <!-- NAVIGATION MENU -->
+    <ul class="nav-links">
+        <!-- NAVIGATION MENUS -->
+        <div class="menu">
+            <li>
+                <input class="searchbar" type="text" placeholder="Search.." />
+            </li>
+            <li><a href="/">About us</a></li>
+            <li class="services">
+                <a href="/">Browse</a>
+                <!-- DROPDOWN MENU -->
+                <ul class="dropdown">
+                    <li><a href="/">Shirts</a></li>
+                    <li><a href="/">Pants</a></li>
+                    <li><a href="/">Jackets</a></li>
+                    <li><a href="/">Shoes</a></li>
+                    <li><a href="/">Accessories</a></li>
+                </ul>
+            </li>
+            <li><a href="/">Pricing</a></li>
+            <li>
+                <% if(user) { %>
+                <a href="/logout">Logout</a>
+                <% } else { %>
+                <a href="/login">Login</a>
+                <% } %>
+            </li>
+        </div>
+    </ul>
+</nav>
