@@ -68,6 +68,8 @@
  }
  .searchbar {
   border-radius: 20px;
+  border-color: transparent;
+  outline: none;
   height: 25px;
   font-size: 17px;
   padding-left: 10px;

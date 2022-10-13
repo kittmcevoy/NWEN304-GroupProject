@@ -6,13 +6,13 @@
         <!-- NAVIGATION MENUS -->
         <div class="menu">
             <li>
-                <input class="searchbar" type="text" placeholder="Search.." />
+                <input class="searchbar" type="text" placeholder="Search.." autocomplete="off"/>
             </li>
 
             <li class="services">
                 <div>
-                    <i href="" class="fas fa-angle-down"></i>
                     <a href="/">Browse</a>
+                    <i href="" class="fas fa-angle-down"></i>
                 </div>
 
                 <!-- DROPDOWN MENU -->
@@ -27,19 +27,19 @@
             <li><a href="/">About us</a></li>
             <div>
                 <li>
-                    <i href="" class="fas fa-shopping-cart"></i>
                     <a href="/">Cart</a>
+                    <i href="" class="fas fa-shopping-cart"></i>
                 </li>
             </div>
 
             <div>
                 <li>
-                    <i href="/login" class="fas fa-user"></i>
                     <% if(user) { %>
                     <a href="/logout">Logout</a>
                     <% } else { %>
                     <a href="/login">Login</a>
                     <% } %>
+                    <i href="/login" class="fas fa-user"></i>
                 </li>
             </div>
         </div>
