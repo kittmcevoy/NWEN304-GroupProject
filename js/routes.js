@@ -63,7 +63,7 @@ module.exports = function (app, path, passport) {
 
     /* Add items and save into database */
     app.get('/add-item', isLoggedIn, (req, res, next) => {
-        res.render('add-product.ejs');
+        res.render('add-item.ejs', { user: req.user });
     });
 
     /* CREATE => items stored in db cluster */
@@ -77,6 +77,10 @@ module.exports = function (app, path, passport) {
         } catch (err) {
             res.status(500).json(err);
         }
+    });
+
+    app.get('/browse', (req, res) => {
+        res.render('browse.ejs', { user: req.user });
     });
 
     /* /items store added products */
