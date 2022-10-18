@@ -2,7 +2,7 @@ const { db } = require('./User.js');
 const Item = require('./Item');
 const Order = require('./Order');
 const Cart = require('./Cart');
-const products = [];
+const items = [];
 
 module.exports = function (app, path, passport) {
     /* Home page routes */
@@ -83,9 +83,14 @@ module.exports = function (app, path, passport) {
         res.render('browse.ejs', { user: req.user });
     });
 
-    /* /items store added products */
-    app.get('/items', (req, res) => {
-        res.json(products);
+    /* /items store in database usig find() */
+    app.get('/items', async(req, res) => {
+        try{
+            const allItems = await Item.find();
+            return res.json(allItems);
+        }catch(err){
+            res.status(500).json(err);
+        }
     });
 
     app.get('/401', (req, res) => {
@@ -101,6 +106,11 @@ module.exports = function (app, path, passport) {
         res.render('cart.ejs');
     });
 
+    // order
+    app.get('/order', isLoggedIn, (req, res, next) => {
+        res.render('order.ejs');
+    });
+    
     /*  404 page if a user typed the wrong URL   */
     app.use((req, res, next) => {
         res.status(404).render('404.ejs');
