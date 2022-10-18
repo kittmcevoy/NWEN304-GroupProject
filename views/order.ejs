@@ -8,10 +8,15 @@
     <title>Order</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/order.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        />
 </head>
 
 <body>
-    <%- include('./adminNavBar.ejs'); %>
+    <%- include('./navbar.ejs', { user: user}); %>
 
     <h1 class="small-container">Thanks for your order</h1>
     <span class="theme-color">Payment Summary</span>

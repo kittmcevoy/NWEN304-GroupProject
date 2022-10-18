@@ -103,12 +103,12 @@ module.exports = function (app, path, passport) {
 
     // Cart
     app.get('/cart', isLoggedIn, (req, res, next) => {
-        res.render('cart.ejs');
+        res.render('cart.ejs', { user: req.user });
     });
 
     // order
     app.get('/order', isLoggedIn, (req, res, next) => {
-        res.render('order.ejs');
+        res.render('order.ejs', { user: req.user });
     });
     
     /*  404 page if a user typed the wrong URL   */
@@ -123,5 +123,5 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
-    res.redirect('/403');
+    res.status(403).redirect('/403');
 }

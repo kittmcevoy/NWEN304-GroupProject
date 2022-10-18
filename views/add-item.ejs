@@ -15,7 +15,7 @@
     </head>
 
     <body>
-        <%- include('./adminNavBar.ejs'); %>
+        <%- include('./navbar.ejs', { user: user}); %>
 
         <main>
             <form class="product-form" action="/add-item" method="POST">
