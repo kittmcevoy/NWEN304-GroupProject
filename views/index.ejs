@@ -11,6 +11,7 @@
         />
         <title>Home</title>
         <script src="/js/server.js"></script>
+        <script type = "text/javascript" src="../js/itemActions.js" id=itemActions></script>
     </head>
     <body>
         <%- include('./navbar.ejs', { user: user}); %>
@@ -24,8 +25,24 @@
             />
         </div>
 
-        <div class="product-info">
-            <h1>THIS AREA WILL HAVE OUR PRODUCTS THAT WE WANT TO ADVERTISE</h1>
+        <div>
+            <h1 class="center-title">Suggested products</h1>
+            <div class="product-info">
+                <div class="product-box">
+                    <h3 class="center-title">Name of product</h3>
+                    <img class="suggested-product-image" height="300px"
+                         width="100%"src="/images/productimg1.png">
+                    <p>Product Description:</p>
+                    <p>Product Price: $50</p>
+                </div>
+                <div class="product-box">
+                    <h3 class="center-title">Name of product</h3>
+                </div>
+                <div class="product-box">
+                    <h3 class="center-title">Name of product</h3>
+                </div>
+            </div>
+
         </div>
         <footer>
             <div class="footer">

@@ -84,7 +84,22 @@
   max-height: 500px;
 }
 .product-info{
-  height: 400px;
+  height: 600px;
+  display: flex;
+  justify-content: space-around;
+}
+.center-title{
+  text-align: center;
+  padding: 10px 0px;
+}
+.product-box{
+  height: 500px;
+  width: 400px;
+  /*padding-left: 10px;*/
+  border: 2px solid black;
+}
+.suggested-product-image{
+  padding: 0px 5px;
 }
 .flex-col{
   display: flex;
