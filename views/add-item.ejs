@@ -39,13 +39,16 @@
                     <label for="price">Price</label>
                     <input type="number" name="price" id="" step="any" />
                 </div>
+
                 <div class="form-control">
-                    <label for="img">Image</label>
+                    <label for="image">Image</label>
                     <input
                         type="file"
-                        name="img"
+                        id="image"
+                        name="image"
+                        value = ""
                         accept="image/jpeg, image/png, image/jpg"
-                        id="item_image"
+                        required
                     />
                     <img src="/images/missing_item.png" , alt="Item to add" />
                 </div>

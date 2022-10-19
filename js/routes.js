@@ -2,9 +2,8 @@ const { db } = require('./User.js');
 const Item = require('./Item');
 const Order = require('./Order');
 const Cart = require('./Cart');
-const items = [];
 
-module.exports = function (app, path, passport) {
+module.exports = function (app, path, passport, upload) {
     /* Home page routes */
     app.get('/', (req, res) => {
         res.render('index.ejs', { user: req.user });
@@ -62,20 +61,25 @@ module.exports = function (app, path, passport) {
     );
 
     /* Add items and save into database */
-    app.get('/add-item', isLoggedIn, (req, res, next) => {
+    app.get('/add-item', (req, res, next) => {
         res.render('add-item.ejs', { user: req.user });
     });
 
     /* CREATE => items stored in db cluster */
-    app.post('/add-item', isLoggedIn, async (req, res) => {
-        let body = req.body;
-        const newItem = new Item(body);
-
+    app.post('/add-item', upload.single('image'), async (req, res) => {
         try {
-            const savedItem = await newItem.save();
-            res.status(200).json(savedItem);
+            let body = req.body;
+            const newItem = await new Item({
+                title: body.title,
+                desc: body.desc,
+                size: body.size,
+                color: body.color,
+                price: body.price,
+                image: 'https://imgbucket-nwen304.s3.ap-southeast-2.amazonaws.com/'.concat(body.image)
+            })
+            res.status(200).json({ message: 'New item added to database' });
         } catch (err) {
-            res.status(500).json(err);
+            res.status(500);
         }
     });
 
