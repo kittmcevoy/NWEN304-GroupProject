@@ -75,8 +75,9 @@ module.exports = function (app, path, passport, upload) {
                 size: body.size,
                 color: body.color,
                 price: body.price,
-                image: 'https://imgbucket-nwen304.s3.ap-southeast-2.amazonaws.com/'.concat(body.image)
-            })
+                url: body.url,
+                image: 'https://imgbucket-nwen304.s3.ap-southeast-2.amazonaws.com/'.concat(body.url)
+            }).save();
             res.status(200).json({ message: 'New item added to the database' });
         } catch (err) {
             res.status(500);

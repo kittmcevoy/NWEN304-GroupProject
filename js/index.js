@@ -28,6 +28,9 @@ app.use(
         secret: 'aDamnGoodSecret',
         resave: false,
         saveUninitialized: true,
+        cookie: {
+            maxAge: 1000 * 60 * 5 // 5 Minutes
+        }
     })
 );
 app.use(passport.initialize());
@@ -36,30 +39,37 @@ app.use(passport.session());
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
+const User = require('./User.js');
 const AWS = require('aws-sdk');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
+const keyID = mongoose.Types.ObjectId('6350a90c22f893d20d7ef15b');
 
-AWS.config.update({
-  accessKeyId: process.env.access,
-  secretAccessKey: process.env.secret,
-  region: process.env.region,
+User.findOne({ _id: keyID }, function (err, body) {
+    if (err) {
+        throw err;
+    }
+
+    AWS.config.update({
+        accessKeyId: body.local.username,
+        secretAccessKey: body.local.password,
+        region: 'ap-southeast-2',
+    });
+
+    s3 = new AWS.S3();
+
+    const upload = multer({
+        storage: multerS3({
+            s3: s3,
+            acl: 'public-read',
+            bucket: 'imgbucket-nwen304',
+            key: function (req, file, cb) {
+                console.log(file);
+                cb(null, file.originalname);
+            },
+        }),
+    });
+    require('./routes.js')(app, path, passport, upload);
 });
-
-s3 = new AWS.S3();
-
-const upload = multer({
-  storage: multerS3({
-      s3: s3,
-      acl: 'public-read',
-      bucket: process.env.bucket,
-      key: function (req, file, cb) {
-          console.log(file);
-          cb(null, file.originalname);
-      },
-  }),
-});
-
-require('./routes.js')(app, path, passport, upload);
 
 app.listen(PORT, console.log(`Listening on port ${PORT}`));
