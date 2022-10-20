@@ -98,6 +98,20 @@ module.exports = function (app, path, passport, upload) {
         }
     });
 
+    /* delete/:id it removes an item in the db by it is ID */
+    app.get("/delete/:id", isLoggedIn , function(req, res) {
+        const ObjectId = require("mongodb").ObjectId;
+        var { id } = req.params;
+        console.log(id);
+        db.collection("items").findOneAndDelete({ _id: ObjectId(id) }, function(error,response){
+          if (error){
+            throw err;
+          } else {
+            return res.redirect("/");
+          }
+        });
+      });
+
     app.get('/401', (req, res) => {
         res.render('401.ejs');
     });

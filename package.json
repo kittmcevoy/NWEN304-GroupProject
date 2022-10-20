@@ -11,7 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "aws-sdk": "^2.1235.0",
+    "aws-sdk": "^2.1236.0",
     "bcrypt": "^5.0.1",
     "chai": "^4.3.6",
     "cookie-parser": "^1.4.6",
