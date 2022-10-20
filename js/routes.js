@@ -61,12 +61,12 @@ module.exports = function (app, path, passport, upload) {
     );
 
     /* Add items and save into database */
-    app.get('/add-item', (req, res, next) => {
+    app.get('/add-item', isLoggedIn, (req, res, next) => {
         res.render('add-item.ejs', { user: req.user });
     });
 
     /* CREATE => items stored in db cluster */
-    app.post('/add-item', upload.single('image'), async (req, res) => {
+    app.post('/add-item', isLoggedIn, upload.single('image'), async (req, res) => {
         try {
             let body = req.body;
             const newItem = await new Item({
@@ -77,7 +77,7 @@ module.exports = function (app, path, passport, upload) {
                 price: body.price,
                 image: 'https://imgbucket-nwen304.s3.ap-southeast-2.amazonaws.com/'.concat(body.image)
             })
-            res.status(200).json({ message: 'New item added to database' });
+            res.status(200).json({ message: 'New item added to the database' });
         } catch (err) {
             res.status(500);
         }
