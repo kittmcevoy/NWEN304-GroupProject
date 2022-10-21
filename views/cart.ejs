@@ -17,16 +17,27 @@
     <body>
         <%- include('./navbar.ejs', { user: user}); %>
 
-        <h2 style="text-align: center">Item Card</h2>
+        <h2 style="text-align: left">Item Card</h2>
 
         <div class="card">
             <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxm7PdXxZp2psxs3AbSNX-H0L7W5HEVE_mSQ&usqp=CAU"
-                style="width: 100%"
+                style="width: 12%"
             />
-            <h1>Item</h1>
-            <p class="price">$19</p>
-            <p><button>Pressed to Check Out</button></p>
+            <style>
+                img {
+                  display: block;
+                  margin-left: left;
+                  margin-right: auto;
+                }
+            </style>
+
+            <h1 style="text-align: left">Item</h1>
+            <p style="text-align: left" class="price">$19</p>
+            <div class="button">
+                <button class="button">Pressed to Check Out</button>
+            </div>
+
         </div>
     </body>
 </html>
