@@ -3,24 +3,14 @@ const Item = require('./Item');
 const Order = require('./Order');
 const Cart = require('./Cart');
 const itemRequests = require('./itemRequests');
+const userRequests = require('./userRequests');
 const {ObjectId} = require("mongodb");
-
-
-const items = [];
 
 module.exports = function (app, path, passport, upload) {
     /* Home page routes */
     app.get('/', async (req, res) => {
-        const allItems = await itemRequests.getAll();
+        const allItems = await itemRequests.getRandomItems(4);
         res.render('index.ejs', {items: allItems, user: req.user});
-    });
-
-    app.get('/users', (req, res) => {
-        db.collection('users')
-            .find()
-            .toArray(function (err, docs) {
-                res.json(docs);
-            });
     });
 
     app.get('/login', (req, res) => {
@@ -117,16 +107,6 @@ module.exports = function (app, path, passport, upload) {
         res.render('browse.ejs', {items: allItems, user: req.user});
     });
 
-    /* /items store in database usig find() */
-    app.get('/items', async(req, res) => {
-        try{
-            const allItems = await Item.find();
-            return res.json(allItems);
-        }catch(err){
-            res.status(500).json(err);
-        }
-    });
-
     /* delete/:id it removes an item in the db by it is ID */
     app.get("/delete/:id", isLoggedIn , function(req, res) {
         const ObjectId = require("mongodb").ObjectId;
@@ -158,6 +138,17 @@ module.exports = function (app, path, passport, upload) {
     app.get('/order', isLoggedIn, (req, res, next) => {
         res.render('order.ejs', { user: req.user });
     });
+
+    // api routes
+    app.get('/api/items', async (req, res) => {
+        const items = await itemRequests.getRandomItems(13);
+        res.json(items);
+    });
+    
+    app.get('/api/users', async (req, res) => {
+        const users = await userRequests.getRandomUsers(13);
+        res.json(users);
+    })
     
     /*  404 page if a user typed the wrong URL   */
     app.use((req, res, next) => {

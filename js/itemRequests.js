@@ -22,6 +22,15 @@ class ItemRequests {
         }
     }
 
+    async getRandomItems(size) {
+        let items = await Item.find();
+        items.sort((a, b) => 0.5 - Math.random());
+        while (items.length > size) {
+            items.pop();
+        }
+        return items;
+    }
+
     async addItem(item) {
         Item.insertOne(item);
     }

@@ -1,11 +1,17 @@
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    min-width: 300px;
     max-width: 300px;
-    margin: auto;
+    margin-bottom: auto;
     text-align: center;
     font-family: arial;
   }
   
+  .card img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+
   .price {
     color: grey;
     font-size: 22px;

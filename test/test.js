@@ -1,5 +1,8 @@
 const expect = require('chai').expect;
+const assert = require('assert');
 const request = require('request');
+const User = require('../js/User');
+const { app, mongoose } = require('../js/index');
 
 describe('Status codes', function () {
     it('Main page status', function (done) {
@@ -20,4 +23,18 @@ describe('Status codes', function () {
     });
 });
 
-describe('Authorisation', function () {});
+describe('Database', function () {
+    it('Create document', (done) => {
+        const newUser = new User({ username: 'mongotest' });
+        newUser.save().then(() => {
+            assert(!newUser.isNew);
+            done();
+        });
+    });
+});
+
+describe('Authorisation', function () {
+    it('Not logged in', (done) => {
+        done();
+    });
+});

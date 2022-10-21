@@ -11,4 +11,11 @@
   padding: 5px;
   font-size: 30px;
   text-align: center;
+  min-width: 400px;
+  max-width: 400px;
+}
+
+.grid-item img {
+  max-height: 100%;
+  max-width: 100%;
 }
