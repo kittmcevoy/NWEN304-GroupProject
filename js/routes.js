@@ -71,6 +71,11 @@ module.exports = function (app, path, passport, upload) {
         res.render('add-item.ejs', { user: req.user });
     });
 
+    app.get('/edit/:id', isLoggedIn, async (req, res) => {
+        const item = await itemRequests.getItemById(req.params.id);
+        res.render('edit-item.ejs', {user: req.user, item: item})
+    })
+
     /* CREATE => items stored in db cluster */
     app.post('/add-item', isLoggedIn, upload.single('image'), async (req, res) => {
         try {
@@ -90,8 +95,26 @@ module.exports = function (app, path, passport, upload) {
         }
     });
 
-    app.get('/browse', (req, res) => {
-        res.render('browse.ejs', { user: req.user });
+    app.post('/edit-item/:id', isLoggedIn, upload.single('image'), async (req, res) => {
+        var { id } = req.params;
+        let body = req.body;
+
+        console.log(body.title)
+        db.collection("items").findOneAndUpdate({ _id: ObjectId(id) }, {$set : {
+                title: body.title,
+                desc: body.desc,
+                size: body.size,
+                color: body.color,
+                price: body.price,
+                url: body.url,
+                image: 'https://imgbucket-nwen304.s3.ap-southeast-2.amazonaws.com/'.concat(body.url)
+            }})
+        res.redirect("/");
+    });
+
+    app.get('/browse', async (req, res) => {
+        const allItems = await itemRequests.getAll();
+        res.render('browse.ejs', {items: allItems, user: req.user});
     });
 
     /* /items store in database usig find() */
