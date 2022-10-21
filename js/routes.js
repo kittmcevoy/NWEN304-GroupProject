@@ -2,11 +2,17 @@ const { db } = require('./User.js');
 const Item = require('./Item');
 const Order = require('./Order');
 const Cart = require('./Cart');
+const itemRequests = require('./itemRequests');
+const {ObjectId} = require("mongodb");
+
+
+const items = [];
 
 module.exports = function (app, path, passport, upload) {
     /* Home page routes */
-    app.get('/', (req, res) => {
-        res.render('index.ejs', { user: req.user });
+    app.get('/', async (req, res) => {
+        const allItems = await itemRequests.getAll();
+        res.render('index.ejs', {items: allItems, user: req.user});
     });
 
     app.get('/users', (req, res) => {
