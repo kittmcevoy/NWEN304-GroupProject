@@ -13,7 +13,8 @@ var userSchema = mongoose.Schema({
         token:      String,
         email:      String,
         username:   String,
-    }
+    },
+    resetPasswordToken: String
 });
 
 userSchema.methods.generateHash = function(password) {

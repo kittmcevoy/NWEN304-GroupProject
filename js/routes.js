@@ -1,10 +1,14 @@
 const { db } = require('./User.js');
 const Item = require('./Item');
+const User = require('./User');
 const Order = require('./Order');
 const Cart = require('./Cart');
 const itemRequests = require('./itemRequests');
 const userRequests = require('./userRequests');
 const {ObjectId} = require("mongodb");
+const crypto = require("crypto");
+const nodemailer = require('nodemailer');
+const bcrypt = require("bcrypt");
 
 module.exports = function (app, path, passport, upload) {
     /* Home page routes */
@@ -66,6 +70,61 @@ module.exports = function (app, path, passport, upload) {
         res.render('edit-item.ejs', {user: req.user, item: item})
     })
 
+    app.get('/forgotPassword',async (req, res) => {
+        res.render('forgotPassword')
+    })
+
+    app.post('/sendForgotPasswordEmail', upload.single('image'), async(req, res) => {
+        let body = req.body.email;
+        const token = crypto.randomBytes(20).toString('hex');
+        await User.findOneAndUpdate({'local.email': body}, {$set : {'resetPasswordToken': token}})
+        const user = await User.findOne({'local.email': body})
+        if(user === null){
+            res.render('500');
+        } else {
+            const transporter = nodemailer.createTransport({
+                service: 'outlook',
+                auth: {
+                    user: 'NWEN304@outlook.com',
+                    pass: 'CoolAsCode12!'
+                }
+            });
+
+            const mailOptions = {
+                from: 'NWEN304@outlook.com',
+                to: `${user.local.email}`,
+                subject: 'Reset Email',
+                text: `localhost:3000/resetPassword/${user._id}/${user.resetPasswordToken}`
+            };
+
+            await transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                    res.render('404')
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    res.render('emailSent.ejs')
+                }
+            });
+        }
+    })
+
+    app.get('/resetPassword/:id/:resetToken', async (req, res) => {
+        const user = await User.findOne({_id: req.params.id})
+        if(user.resetPasswordToken === req.params.resetToken){
+            res.render('resetPassword.ejs', {id:req.params.id, resetToken:req.params.resetToken})
+        }else{
+            res.render('403.ejs')
+        }
+    })
+
+    app.post('/changePassword/:id/:resetToken', async (req, res) => {
+        await User.findOneAndUpdate({_id: req.params.id}, {$set : {'local.password': bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null)}})
+        await User.findOneAndUpdate({_id: req.params.id}, {$set : {resetPasswordToken: null}})
+        const c = User.findOne({_id: req.params.id})
+        res.redirect('/');
+    })
+
     /* CREATE => items stored in db cluster */
     app.post('/add-item', isLoggedIn, upload.single('image'), async (req, res) => {
         try {
@@ -89,7 +148,6 @@ module.exports = function (app, path, passport, upload) {
         var { id } = req.params;
         let body = req.body;
 
-        console.log(body.title)
         db.collection("items").findOneAndUpdate({ _id: ObjectId(id) }, {$set : {
                 title: body.title,
                 desc: body.desc,
@@ -111,7 +169,6 @@ module.exports = function (app, path, passport, upload) {
     app.get("/delete/:id", isLoggedIn , function(req, res) {
         const ObjectId = require("mongodb").ObjectId;
         var { id } = req.params;
-        console.log(id);
         db.collection("items").findOneAndDelete({ _id: ObjectId(id) }, function(error,response){
           if (error){
             throw err;
