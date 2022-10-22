@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="/css/image-card.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        />
+        <title>Home</title>
+        <script src="/js/server.js"></script>
+    </head>
+    <body>
+        <%- include('./navbar.ejs', { user: user}); %>
+
+        <div class="product-image">
+            <img
+                height="500px"
+                width="100%"
+                src="/images/productimg1.png"
+                alt="Product Image"
+            />
+        </div>
+
+        <div>
+            <br>
+            <h1 class="center-title">Suggested products</h1>
+            <br>
+            <div class="product-info">
+                <% for(var i = 0; i < 4; i++) { %>
+                    <div class="card">
+                        <img
+                                src="<%- items[i].image %>"
+                                style="height: 300px"
+                        />
+                        <h1><%= items[i].title %></h1>
+                        <p class="price">$ <%= items[i].price %></p>
+                        <p> <%= items[i].desc %></p>
+                    </div>
+                <% }; %>
+            </div>
+
+
+        </div>
+        <footer>
+            <div class="footer">
+                <div class="contact-info flex-col">
+                    <h2>Contact Us</h2>
+                    <h3 class="flex-row">
+                        Phone: &nbsp
+                        <p>021 234 5678</p>
+                    </h3>
+                </div>
+
+                <div class="social-icons">
+                    Get social with us
+                    <img
+                        height="30px"
+                        src="/images/google.png"
+                        alt="Google button"
+                    />
+                    <img
+                        height="30px"
+                        src="/images/twitter.png"
+                        alt="Twitter button"
+                    />
+                    <img
+                        height="30px"
+                        src="/images/facebook.png"
+                        alt="Facebook button"
+                    />
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

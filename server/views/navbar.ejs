@@ -1,0 +1,70 @@
+<nav class="navbar">
+    <!-- LOGO -->
+    <div class="logo"><a href="/" style="color: white">Clothes.</a></div>
+    <!-- NAVIGATION MENU -->
+    <ul class="nav-links">
+        <!-- NAVIGATION MENUS -->
+        <div class="menu">
+            <li>
+                <input
+                    class="searchbar"
+                    type="text"
+                    placeholder="Search.."
+                    autocomplete="off"
+                />
+            </li>
+
+            <div>
+                <% if(user) { %>
+                <li>
+                    <a href="/add-item">Add Item</a>
+                </li>
+                <% } %>
+            </div>
+
+            <li class="services">
+                <div>
+                    <a href="/browse">Browse</a>
+                    <i href="" class="fas fa-angle-down"></i>
+                </div>
+
+                <!-- DROPDOWN MENU -->
+                <ul class="dropdown">
+                    <li><a href="/browse">All products</a></li>
+                    <li><a href="/browse">Shirts</a></li>
+                    <li><a href="/browse">Pants</a></li>
+                    <li><a href="/browse">Shoes</a></li>
+                    <li><a href="/browse">Accessories</a></li>
+                </ul>
+            </li>
+            <li><a href="/about">About us</a></li>
+
+            <div>
+                <li>
+                    <a href="/cart">Cart</a>
+                    <i href="" class="fas fa-shopping-cart"></i>
+                </li>
+            </div>
+
+            <% if(user) { %>
+            <div>
+                <li>
+                    <a href="/order">Orders</a>
+                    <i href="" class="fas fa-file"></i>
+                </li>
+            </div>
+            <% } %>
+
+            <div>
+                <li>
+                    <% if(user) { %>
+                    <a href="/logout">Logout</a>
+                    <% } else { %>
+                    <a href="/login">Login</a>
+                    <% } %>
+                    <i href="/login" class="fas fa-user"></i>
+                </li>
+            </div>
+        </div>
+    </ul>
+</nav>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Cart</title>
+        <link rel="stylesheet" href="/css/main.css" />
+        <link rel="stylesheet" href="/css/cart.css" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        />
+    </head>
+
+    <body>
+        <%- include('./navbar.ejs', { user: user}); %>
+
+        <h2 style="text-align: left">Item Card</h2>
+
+        <div class="card">
+            <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxm7PdXxZp2psxs3AbSNX-H0L7W5HEVE_mSQ&usqp=CAU"
+                style="width: 12%"
+            />
+            <style>
+                img {
+                  display: block;
+                  margin-left: left;
+                  margin-right: auto;
+                }
+            </style>
+
+            <h1 style="text-align: left">Item</h1>
+            <p style="text-align: left" class="price">$19</p>
+            <div class="button">
+                <button class="button">Pressed to Check Out</button>
+            </div>
+
+        </div>
+    </body>
+</html>
