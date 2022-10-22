@@ -141,12 +141,24 @@ module.exports = function (app, path, passport, upload) {
 
     // api routes
     app.get('/api/items', async (req, res) => {
-        const items = await itemRequests.getRandomItems(13);
+        const items = await itemRequests.getAll();
         res.json(items);
     });
     
     app.get('/api/users', async (req, res) => {
-        const users = await userRequests.getRandomUsers(13);
+        const users = await userRequests.getAll();
+        res.json(users);
+    })
+
+    app.get('/api/items/:size', async (req, res) => {
+        var { size } = req.params;
+        const items = await itemRequests.getRandomItems(size);
+        res.json(items);
+    });
+    
+    app.get('/api/users/:size', async (req, res) => {
+        var { size } = req.params;
+        const users = await userRequests.getRandomUsers(size);
         res.json(users);
     })
     
